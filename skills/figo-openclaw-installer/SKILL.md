@@ -79,7 +79,7 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
     "baseUrl": "https://your-oneapi-domain.com/v1",
     "apiKey": "${ONEAPI_KEY}",
     "models": [
-      { "id": "gpt-4o", "usage": "chat" },
+      { "id": "GPT5.2", "usage": "chat" },
       { "id": "claude-3-5-sonnet", "usage": "chat" }
     ]
   }
@@ -120,6 +120,7 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
     "baseUrl": "https://api.openai.com/v1",
     "apiKey": "${OPENAI_API_KEY}",
     "models": [
+      { "id": "GPT5.2", "usage": "chat" },
       { "id": "gpt-4o", "usage": "chat" },
       { "id": "gpt-4-turbo", "usage": "chat" },
       { "id": "gpt-3.5-turbo", "usage": "chat" }
@@ -175,7 +176,7 @@ Ask user to choose **ONE** primary provider and provide details. / 让用户选�
 **Options / 选项**:
 1. **OpenAI** (Official)
    - Ask: API Key?
-   - Ask: Model Name (default: `gpt-4o`)?
+   - Ask: Model Name (default: `GPT5.2`)?
    - Default Model: `openai/<model_name>`
 2. **Anthropic** (Claude)
    - Ask: API Key?
@@ -443,13 +444,13 @@ Example Output / 输出示例:
 ## 2. Model Configuration / 模型配置
 | Provider | Model ID | Usage |
 |----------|----------|-------|
-| **Primary** | `openai/gpt-4o` | Chat, Code |
+| **Primary** | `openai/GPT5.2` | Chat, Code |
 | **Fallback** | `minimax/abab6.5s-chat` | Anti-Rate Limit |
 | **Embedding**| `local/text-embedding-3-small` | Memory Search |
 
 > *Full Model Config (JSON snapshot):*
 > ```json
-> { "openai": { "model": "gpt-4o", "apiKey": "sk-..." } }
+> { "openai": { "model": "GPT5.2", "apiKey": "sk-..." } }
 > ```
 
 ## 3. Active Channels / 活跃渠道
