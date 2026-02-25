@@ -268,6 +268,67 @@ Based on inputs / 根据输入:
    **Verification**:
    - Execute: `openclaw config list` to verify `agent.model.primary` is set correctly. / 执行 `openclaw config list` 确认主模型已设置正确。
 
+4. **Action (Verification)**: **Test Model Connectivity / 测试模型连通性**
+   *Execute `curl` to verify credentials. / 执行 curl 命令验证凭证。*
+   *Note: On Windows PowerShell, use `curl.exe` to avoid alias issues.*
+
+   **Execute the following commands based on user selection:**
+
+   **For OpenAI:**
+   ```bash
+   curl https://api.openai.com/v1/chat/completions \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <USER_KEY>" \
+     -d '{ "model": "gpt-4o", "messages": [{"role": "user", "content": "Hello"}] }'
+   ```
+
+   **For Anthropic:**
+   ```bash
+   curl https://api.anthropic.com/v1/messages \
+     -H "x-api-key: <USER_KEY>" \
+     -H "anthropic-version: 2023-06-01" \
+     -H "content-type: application/json" \
+     -d '{ "model": "claude-3-5-sonnet-20240620", "max_tokens": 10, "messages": [{"role": "user", "content": "Hello"}] }'
+   ```
+
+   **For DeepSeek:**
+   ```bash
+   curl https://api.deepseek.com/chat/completions \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <USER_KEY>" \
+     -d '{ "model": "deepseek-chat", "messages": [{"role": "user", "content": "Hello"}] }'
+   ```
+
+   **For Google:**
+   ```bash
+   curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=<USER_KEY>" \
+     -H "Content-Type: application/json" \
+     -d '{ "contents": [{ "parts":[{"text": "Hello"}] }] }'
+   ```
+
+   **For MiniMax:**
+   ```bash
+   # Use the Base URL from config (e.g., https://api.minimax.io/anthropic)
+   curl <BASE_URL>/messages \
+     -H "x-api-key: <USER_KEY>" \
+     -H "anthropic-version: 2023-06-01" \
+     -H "content-type: application/json" \
+     -d '{ "model": "abab6.5s-chat", "max_tokens": 10, "messages": [{"role": "user", "content": "Hello"}] }'
+   ```
+
+   **For Ollama:**
+   ```bash
+   curl <BASE_URL>/api/generate -d '{ "model": "<USER_MODEL_NAME>", "prompt": "Hello", "stream": false }'
+   ```
+
+   **For Custom/OneAPI:**
+   ```bash
+   curl <BASE_URL>/chat/completions \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <USER_KEY>" \
+     -d '{ "model": "<USER_MODEL_NAME>", "messages": [{"role": "user", "content": "Hello"}] }'
+   ```
+
 **Transition**: Proceed to Phase 3.5. / **下一步**：进入第 3.5 阶段（性能优化）。
 
 ### Phase 3.5: Performance & Stability Optimization / 性能与稳定性优化
