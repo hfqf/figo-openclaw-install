@@ -240,7 +240,9 @@ Based on inputs / 根据输入:
      - **Windows**: Copy shortcut to `shell:startup`. / **Windows**: 将快捷方式复制到启动目录。
      - **Linux**: Configure `systemd` or `cron`. / **Linux**: 配置 systemd。
 
-3. **Action (Mandatory)**: Copy `OpenClaw_User_Manual.md` to the **Desktop** as `OpenClaw 使用手册.md`. / **强制动作**: 将 `OpenClaw_User_Manual.md` 复制到桌面并重命名为 `OpenClaw 使用手册.md`。
+3. **Action (Mandatory)**: 
+   - Copy `OpenClaw使用手册.md` to the **Desktop**. / 将 `OpenClaw使用手册.md` 复制到桌面。
+   - Copy `OpenClaw_Use_Cases.md` to the **Desktop** as `OpenClaw 常见场景.md`. / 将 `OpenClaw_Use_Cases.md` 复制到桌面并重命名为 `OpenClaw 常见场景.md`。
 
 ### Phase 6: Final Handoff / 最终交付
 **Trigger**: All previous phases completed. / 触发条件：所有前序步骤完成。
@@ -259,7 +261,7 @@ Example Output / 输出示例:
 - 访问 Dashboard: http://127.0.0.1:18789/
 - 使用 openclaw tui 打开终端界面
 - 配置模型: openclaw models
-- **查看桌面上的《OpenClaw 使用手册》**
+- **查看桌面上的《OpenClaw使用手册》和《OpenClaw 常见场景》**
 ```
 
 ### Phase 7: Verification & Troubleshooting / 验证与排错
