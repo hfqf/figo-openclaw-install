@@ -21,21 +21,20 @@ Follow these steps strictly / 请严格遵循以下步骤:
 
 ### Phase 1: Environment Check / 环境检查
 1. **Action**: Check user's OS. / 检查操作系统。
-2. **Action**: Verify Docker installation (`docker --version`, `docker-compose --version`). / 验证 Docker 环境。
-3. **Action**: **Check Git Installation / 检查 Git 安装**:
+2. **Action**: **Check Git Installation / 检查 Git 安装**:
    - Execute: `git --version`.
    - **If NOT installed**:
      - **Auto-Install (Windows)**: Try `winget install Git.Git -e --source winget`. / **自动安装**：尝试使用 winget 安装 Git。
      - If failing, **STOP** and ask user to install Git manually. / 如果失败，**暂停**并提示用户手动安装。
-4. **Action**: **Check NPM Registry / 检查 NPM 源**:
+3. **Action**: **Check NPM Registry / 检查 NPM 源**:
    - Execute: `npm config get registry`.
    - **Check**: Is it a Chinese mirror (taobao, npmmirror, tencent)? / **检查**：是否为国内源？
    - **If NO (e.g., default npmjs.org)**:
      - **Auto-Fix**: Switch to Taobao/Aliyun mirror. / **自动修复**：切换到淘宝/阿里云镜像。
      - Execute: `npm config set registry https://registry.npmmirror.com/`
      - Verify: `npm config get registry`.
-5. **Action**: Check system resources (RAM/CPU). / 检查系统资源。
-6. **Action**: **Network/Proxy Check** (See "Proxy Configuration Strategy" below). / **网络代理检查**（详见下方的代理配置策略）。
+4. **Action**: Check system resources (RAM/CPU). / 检查系统资源。
+5. **Action**: **Network/Proxy Check** (See "Proxy Configuration Strategy" below). / **网络代理检查**（详见下方的代理配置策略）。
 
 ### Phase 2: Configuration Collection / 配置收集
 Ask for details / 询问以下信息:
@@ -51,6 +50,8 @@ Based on inputs / 根据输入:
 1. **Action**: Generate `docker-compose.yml`. / 生成 `docker-compose.yml`。
 2. **Action**: Generate `.env`. **IMPORTANT**: Inject `HTTP_PROXY` if detected. / 生成 `.env`。**重要**：如果检测到代理，自动注入 `HTTP_PROXY`。
 3. **Action**: Start service (`docker-compose up -d`). / 启动服务。
+
+**Transition**: Proceed to Phase 3.5. / **下一步**：进入第 3.5 阶段（性能优化）。
 
 ### Phase 3.5: Performance & Stability Optimization / 性能与稳定性优化
 **Trigger**: Always check for high availability needs. / 触发条件：始终检查高可用性需求。
@@ -84,8 +85,10 @@ Based on inputs / 根据输入:
      docker-compose exec openclaw openclaw config set agents.defaults.heartbeat.every "1h"
      ```
 
+**Transition**: Proceed to Phase 4. / **下一步**：进入第四阶段。
+
 ### Phase 4: Feishu Integration Guide / 飞书集成向导 (If Selected)
-**Trigger**: User wants to install/configure Feishu plugin. / 触发条件：用户需要配置飞书。
+**Trigger**: User wants to install/configure Feishu plugin. **Check this immediately after Phase 3.5.** / 触发条件：用户需要配置飞书。**请在 3.5 阶段完成后立即检查此项。**
 
 1. **Step 1: App Registration / 应用注册**: 
    - Guide user to Feishu Open Platform to create an app & enable "Bot". / 引导用户去飞书开放平台创建应用并开启“机器人”能力。
@@ -107,13 +110,14 @@ Based on inputs / 根据输入:
      ```
    - **Verify**: Confirm binding. / 确认绑定成功。
 
-### Phase 5: Post-Installation (Auto-Start) / 安装后（开机自启）
-**Trigger**: Successfully executed `openclaw pairing` command (or Feishu binding). / 触发条件：`openclaw pairing` 命令（或飞书绑定）执行成功后。
+**Transition**: Proceed to Phase 5. / **下一步**：进入第五阶段。
+
+### Phase 5: Post-Installation (Auto-Start & Manual) / 安装后（自启与手册）
+**Trigger**: **Always execute this phase after installation (regardless of Feishu setup).** / 触发条件：**安装完成后始终执行此阶段（无论是否配置飞书）。**
 
 1. **Ask User**: "Do you want OpenClaw to start automatically on boot?" / **询问用户**：“是否需要开机自启动？”
 2. **If YES**:
    - **Action**: Create a startup script (e.g., `start_openclaw.bat` or `.sh`) on the **Desktop**. / **创建启动脚本**：默认放在桌面。
-   - **Action**: Copy `OpenClaw_User_Manual.md` to the **Desktop** as `OpenClaw 使用手册.md`. / **Action**: 将 `OpenClaw_User_Manual.md` 复制到桌面并重命名为 `OpenClaw 使用手册.md`。
    - **Script Content**: 
      - `docker-compose -f <abs_path>/docker-compose.yml up -d`
      - Wait 5-10 seconds for services to init. / 等待 5-10 秒以完成初始化。
@@ -123,7 +127,29 @@ Based on inputs / 根据输入:
      - **Windows**: Copy shortcut to `shell:startup`. / **Windows**: 将快捷方式复制到启动目录。
      - **Linux**: Configure `systemd` or `cron`. / **Linux**: 配置 systemd。
 
-### Phase 6: Verification & Troubleshooting / 验证与排错
+3. **Action (Mandatory)**: Copy `OpenClaw_User_Manual.md` to the **Desktop** as `OpenClaw 使用手册.md`. / **强制动作**: 将 `OpenClaw_User_Manual.md` 复制到桌面并重命名为 `OpenClaw 使用手册.md`。
+
+### Phase 6: Final Handoff / 最终交付
+**Trigger**: All previous phases completed. / 触发条件：所有前序步骤完成。
+
+**Action**: Display a summary table. / **动作**：展示汇总表。
+Example Output / 输出示例:
+```markdown
+✅ OpenClaw 安装完成！
+| 项目 | 状态 |
+|------|------|
+| 版本 | 2026.2.24 |
+| Gateway | 运行中 |
+| Dashboard | http://127.0.0.1:18789/ |
+
+现在你可以：
+- 访问 Dashboard: http://127.0.0.1:18789/
+- 使用 openclaw tui 打开终端界面
+- 配置模型: openclaw models
+- **查看桌面上的《OpenClaw 使用手册》**
+```
+
+### Phase 7: Verification & Troubleshooting / 验证与排错
 1. **Action**: Monitor start output. / 监控启动日志。
 2. **Action**: If errors occur (like `spawn EINVAL`), **IMMEDIATELY** apply fix from Knowledge Base. / 如遇报错，**立即**应用知识库中的修复方案。
 
