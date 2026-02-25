@@ -7,7 +7,7 @@ An automated, bilingual (Chinese/English) expert skill for installing and config
 
 ## Features
 
-- **Automated Installation**: Generates `docker-compose.yml` and `.env` based on user needs.
+- **Automated Installation**: Generates `.env` based on user needs.
 - **Smart Proxy Detection**: Automatically detects system proxies (Env/Registry/Ports) for overseas model access.
 - **Feishu Integration**:
   - Auto-fixes Windows `spawn EINVAL` errors.
@@ -49,7 +49,7 @@ Or ask naturally:
 
 ## 功能特性
 
-- **全自动化安装**：根据用户需求自动生成 `docker-compose.yml` 和 `.env` 配置文件。
+- **全自动化安装**：根据用户需求自动生成 `.env` 配置文件。
 - **智能代理检测**：自动检测系统代理（环境变量/注册表/常用端口），解决海外模型连接问题。
 - **飞书深度集成**：
   - 自动修复 Windows 下的 `spawn EINVAL` 报错。
