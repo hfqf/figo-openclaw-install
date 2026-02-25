@@ -175,7 +175,8 @@ Ask user to choose **ONE** primary provider and provide details. / 让用户选�
 **Options / 选项**:
 1. **OpenAI** (Official)
    - Ask: API Key?
-   - Default Model: `openai/gpt-4o`
+   - Ask: Model Name (default: `gpt-4o`)?
+   - Default Model: `openai/<model_name>`
 2. **Anthropic** (Claude)
    - Ask: API Key?
    - Default Model: `anthropic/claude-3-5-sonnet-20240620`
@@ -216,7 +217,7 @@ Based on inputs / 根据输入:
    **For OpenAI:**
    ```bash
    openclaw config set models.providers.openai.apiKey "<USER_KEY>"
-   openclaw config set agent.model.primary "openai/gpt-4o"
+   openclaw config set agent.model.primary "openai/<USER_MODEL_NAME>"
    ```
 
    **For Anthropic:**
@@ -279,7 +280,7 @@ Based on inputs / 根据输入:
    curl https://api.openai.com/v1/chat/completions \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer <USER_KEY>" \
-     -d '{ "model": "gpt-4o", "messages": [{"role": "user", "content": "Hello"}] }'
+     -d '{ "model": "<USER_MODEL_NAME>", "messages": [{"role": "user", "content": "Hello"}] }'
    ```
 
    **For Anthropic:**
