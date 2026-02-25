@@ -73,6 +73,61 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
   }
   ```
 
+  **4. MiniMax (Hailuo AI / 海螺)**
+  *Note: Choose the correct endpoint based on your account region.*
+  *注意：请根据你的账户注册区域选择对应的配置。*
+
+  **Option A: International / 海外版 (api.minimax.io)**
+  ```json
+  "minimax": {
+    "api": "anthropic-messages",
+    "baseUrl": "https://api.minimax.io/anthropic",
+    "apiKey": "${MINIMAX_API_KEY}",
+    "models": [
+      { "id": "minimax/abab6.5s-chat", "usage": "chat" }
+    ]
+  }
+  ```
+
+  **Option B: Domestic / 国内版 (api.minimaxi.com)**
+  ```json
+  "minimax": {
+    "api": "anthropic-messages",
+    "baseUrl": "https://api.minimaxi.com/anthropic",
+    "apiKey": "${MINIMAX_API_KEY}",
+    "models": [
+      { "id": "minimax/abab6.5s-chat", "usage": "chat" }
+    ]
+  }
+  ```
+
+  **5. OpenAI (Official / 官方)**
+  ```json
+  "openai": {
+    "api": "openai-completions",
+    "baseUrl": "https://api.openai.com/v1",
+    "apiKey": "${OPENAI_API_KEY}",
+    "models": [
+      { "id": "gpt-4o", "usage": "chat" },
+      { "id": "gpt-4-turbo", "usage": "chat" },
+      { "id": "gpt-3.5-turbo", "usage": "chat" }
+    ]
+  }
+  ```
+
+  **6. Google Gemini (OpenAI Compatible / 兼容模式)**
+  ```json
+  "google": {
+    "api": "openai-completions",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai/",
+    "apiKey": "${GEMINI_API_KEY}",
+    "models": [
+      { "id": "gemini-1.5-flash", "usage": "chat" },
+      { "id": "gemini-1.5-pro", "usage": "chat" }
+    ]
+  }
+  ```
+
 ## Installation Workflow / 安装流程
 
 Follow these steps strictly / 请严格遵循以下步骤:
