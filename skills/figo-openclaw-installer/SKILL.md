@@ -242,7 +242,7 @@ Based on inputs / 根据输入:
 
 3. **Action (Mandatory)**: 
    - Copy `OpenClaw使用手册.md` to the **Desktop**. / 将 `OpenClaw使用手册.md` 复制到桌面。
-   - Copy `OpenClaw_Use_Cases.md` to the **Desktop** as `OpenClaw 常见场景.md`. / 将 `OpenClaw_Use_Cases.md` 复制到桌面并重命名为 `OpenClaw 常见场景.md`。
+   - Copy `OpenClaw常见场景.md` to the **Desktop**. / 将 `OpenClaw常见场景.md` 复制到桌面。
 
 ### Phase 6: Final Handoff / 最终交付
 **Trigger**: All previous phases completed. / 触发条件：所有前序步骤完成。
@@ -292,7 +292,7 @@ Example Output / 输出示例:
 ---
 **Next Steps / 下一步**:
 - 访问 Dashboard: http://127.0.0.1:18789/
-- **查看桌面上的《OpenClaw使用手册》和《OpenClaw 常见场景》**
+- **查看桌面上的《OpenClaw使用手册》和《OpenClaw常见场景》**
 ```
 
 ### Phase 7: Verification & Troubleshooting / 验证与排错
