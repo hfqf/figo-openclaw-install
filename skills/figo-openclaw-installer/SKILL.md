@@ -15,6 +15,21 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
 
 ---
 
+## Knowledge Base / 基础知识
+
+- **What is OpenClaw? / OpenClaw 是什么？**
+  OpenClaw is an open-source AI Agent platform that connects LLMs (like OpenAI, Claude) to various tools and communication channels (like Feishu, Slack). It allows you to build autonomous assistants that can execute tasks, manage memory, and interact with users naturally.
+  OpenClaw 是一个开源的 AI Agent 平台，它将大语言模型（如 OpenAI, Claude）与各种工具和通讯渠道（如飞书、Slack）连接起来。你可以用它构建能够执行任务、管理记忆并与用户自然交互的自主助手。
+
+- **Official Documentation / 官方文档**
+  - **Website**: https://docs.openclaw.ai/
+  - **Configuration Guide**: https://docs.openclaw.ai/gateway/configuration
+
+- **Configuration File Path / 配置文件路径**
+  - **Project Config**: `.env` (located in the installation directory / 位于安装目录).
+  - **Global Config**: `~/.openclaw/openclaw.json` (user-level settings / 用户级设置).
+  - **Logs**: `/tmp/openclaw/` or installation directory `logs/`.
+
 ## Installation Workflow / 安装流程
 
 Follow these steps strictly / 请严格遵循以下步骤:
