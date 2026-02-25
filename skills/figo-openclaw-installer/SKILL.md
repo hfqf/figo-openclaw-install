@@ -209,7 +209,7 @@ Based on inputs / 根据输入:
 
 2. **Step 2: Configuration / 配置**:
    - Update `.env`. / 更新配置。
-   - **Instruct User**: "Set Request URL to `<Your-Domain>/api/v1/feishu/webhook` in Feishu Console." / **指引用户**：在飞书后台配置请求地址。
+   - **Instruct User**: "In Feishu Console -> Event Subscriptions, select **Long Connection (Websocket)** mode. Do NOT configure a Request URL." / **指引用户**：在飞书后台 -> 事件订阅中，选择 **长连接 (Websocket)** 模式。**不要**配置请求地址 (Request URL)。
 
 3. **Step 3: Permissions & Release / 权限与发布**:
    - **Instruct User**: "Add permissions (read_message, send_message) and release app." / **指引用户**：添加权限并发布版本。
