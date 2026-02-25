@@ -30,6 +30,49 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
   - **Global Config**: `~/.openclaw/openclaw.json` (user-level settings / 用户级设置).
   - **Logs**: `/tmp/openclaw/` or installation directory `logs/`.
 
+- **Model Configuration Templates / 主流模型配置模板**
+  Add these to `models.providers` in `~/.openclaw/openclaw.json`.
+  将这些配置添加到 `~/.openclaw/openclaw.json` 的 `models.providers` 字段中。
+
+  **1. Ollama (Local / 本地)**
+  ```json
+  "ollama": {
+    "api": "openai-completions",
+    "baseUrl": "http://localhost:11434/v1",
+    "apiKey": "ollama",
+    "models": [
+      { "id": "ollama/llama3", "usage": "chat" },
+      { "id": "ollama/qwen2.5", "usage": "chat" }
+    ]
+  }
+  ```
+
+  **2. DeepSeek (Official / 深度求索)**
+  ```json
+  "deepseek": {
+    "api": "openai-completions",
+    "baseUrl": "https://api.deepseek.com",
+    "apiKey": "${DEEPSEEK_API_KEY}",
+    "models": [
+      { "id": "deepseek-chat", "usage": "chat" },
+      { "id": "deepseek-coder", "usage": "code" }
+    ]
+  }
+  ```
+
+  **3. Generic OpenAI Compatible (OneAPI/NewAPI)**
+  ```json
+  "oneapi": {
+    "api": "openai-completions",
+    "baseUrl": "https://your-oneapi-domain.com/v1",
+    "apiKey": "${ONEAPI_KEY}",
+    "models": [
+      { "id": "gpt-4o", "usage": "chat" },
+      { "id": "claude-3-5-sonnet", "usage": "chat" }
+    ]
+  }
+  ```
+
 ## Installation Workflow / 安装流程
 
 Follow these steps strictly / 请严格遵循以下步骤:
