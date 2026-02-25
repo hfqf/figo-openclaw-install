@@ -47,7 +47,19 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
   }
   ```
 
-  **2. DeepSeek (Official / 深度求索)**
+  **1. Anthropic (Official / 官方)**
+```json
+"anthropic": {
+  "api": "anthropic-messages",
+  "apiKey": "${ANTHROPIC_API_KEY}",
+  "models": [
+    { "id": "claude-3-5-sonnet-20240620", "usage": "chat" },
+    { "id": "claude-3-opus-20240229", "usage": "chat" }
+  ]
+}
+```
+
+**2. DeepSeek (Official / 深度求索)**
   ```json
   "deepseek": {
     "api": "openai-completions",
@@ -156,13 +168,105 @@ Ask for details / 询问以下信息:
 - **Ports**: default 80/443 or custom? / 端口：默认 80/443 还是自定义？
 - **Storage**: Where to store data (local path)? / 存储路径？
 - **Plugins**: Need Feishu or others? / 插件：是否需要飞书或其他集成？
-- **Models**: Which LLM models (OpenAI, Claude, local)? / 模型：打算使用哪些模型（OpenAI, Claude, 本地模型）？
+
+**Model Selection / 模型选择 (Mandatory / 必填)**:
+Ask user to choose **ONE** primary provider and provide details. / 让用户选择一个主模型并提供详情。
+
+**Options / 选项**:
+1. **OpenAI** (Official)
+   - Ask: API Key?
+   - Default Model: `openai/gpt-4o`
+2. **Anthropic** (Claude)
+   - Ask: API Key?
+   - Default Model: `anthropic/claude-3-5-sonnet-20240620`
+3. **DeepSeek** (Official)
+   - Ask: API Key?
+   - Default Model: `deepseek/deepseek-chat`
+4. **Google** (Gemini)
+   - Ask: API Key?
+   - Default Model: `google/gemini-1.5-pro`
+5. **MiniMax** (International / 海外版)
+   - Ask: API Key? Group ID (optional)?
+   - Default Model: `minimax/abab6.5s-chat`
+6. **MiniMax** (Domestic / 国内版)
+   - Ask: API Key? Group ID (optional)?
+   - Default Model: `minimax/abab6.5s-chat`
+7. **Ollama** (Local)
+   - Ask: Base URL (e.g., http://host.docker.internal:11434)?
+   - Ask: Model Name (e.g., llama3)?
+   - Default Model: `ollama/<model_name>`
+8. **Custom / OneAPI** (OpenAI Compatible)
+   - Ask: Base URL?
+   - Ask: API Key?
+   - Ask: Model Name?
 
 ### Phase 3: Automatic Processing / 自动化处理
 Based on inputs / 根据输入:
-1. **Action**: Generate `.env` configuration. **IMPORTANT**: Inject `HTTP_PROXY` if detected. / 生成 `.env` 配置。**重要**：如果检测到代理，自动注入 `HTTP_PROXY`。
+
+1. **Action**: Generate `.env` configuration. **IMPORTANT**: Inject `HTTP_PROXY` if detected. / 生成 `.env` 配置。
 2. **Action**: Start service. / 启动服务。
-   - Execute: `openclaw start` (or ensure service is running). / 执行启动命令（或确保服务已运行）。
+   - Execute: `openclaw start` (or ensure service is running). / 执行启动命令。
+
+3. **Action (CRITICAL)**: **Configure Auth & Model via CLI / 通过命令行配置认证与模型**
+   *Note: This fixes "No API key found" errors by updating the running agent's config.*
+   *注意：这一步通过命令行更新配置，修复找不到 API Key 的错误。*
+
+   **Execute the following commands based on user selection:**
+
+   **For OpenAI:**
+   ```bash
+   openclaw config set models.providers.openai.apiKey "<USER_KEY>"
+   openclaw config set agent.model.primary "openai/gpt-4o"
+   ```
+
+   **For Anthropic:**
+   ```bash
+   openclaw config set models.providers.anthropic.apiKey "<USER_KEY>"
+   openclaw config set agent.model.primary "anthropic/claude-3-5-sonnet-20240620"
+   ```
+
+   **For DeepSeek:**
+   ```bash
+   openclaw config set models.providers.deepseek.apiKey "<USER_KEY>"
+   openclaw config set models.providers.deepseek.baseUrl "https://api.deepseek.com"
+   openclaw config set agent.model.primary "deepseek/deepseek-chat"
+   ```
+
+   **For Google:**
+   ```bash
+   openclaw config set models.providers.google.apiKey "<USER_KEY>"
+   openclaw config set agent.model.primary "google/gemini-1.5-pro"
+   ```
+
+   **For MiniMax (International):**
+   ```bash
+   openclaw config set models.providers.minimax.apiKey "<USER_KEY>"
+   openclaw config set models.providers.minimax.baseUrl "https://api.minimax.io/anthropic"
+   openclaw config set agent.model.primary "minimax/abab6.5s-chat"
+   ```
+
+   **For MiniMax (Domestic):**
+   ```bash
+   openclaw config set models.providers.minimax.apiKey "<USER_KEY>"
+   openclaw config set models.providers.minimax.baseUrl "https://api.minimaxi.com/anthropic"
+   openclaw config set agent.model.primary "minimax/abab6.5s-chat"
+   ```
+
+   **For Ollama:**
+   ```bash
+   openclaw config set models.providers.ollama.baseUrl "<USER_URL>"
+   openclaw config set agent.model.primary "ollama/<USER_MODEL_NAME>"
+   ```
+
+   **For Custom/OneAPI:**
+   ```bash
+   openclaw config set models.providers.custom.apiKey "<USER_KEY>"
+   openclaw config set models.providers.custom.baseUrl "<USER_URL>"
+   openclaw config set agent.model.primary "custom/<USER_MODEL_NAME>"
+   ```
+
+   **Verification**:
+   - Execute: `openclaw config list` to verify `agent.model.primary` is set correctly. / 执行 `openclaw config list` 确认主模型已设置正确。
 
 **Transition**: Proceed to Phase 3.5. / **下一步**：进入第 3.5 阶段（性能优化）。
 
