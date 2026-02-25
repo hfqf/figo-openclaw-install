@@ -47,9 +47,9 @@ Ask for details / 询问以下信息:
 
 ### Phase 3: Automatic Processing / 自动化处理
 Based on inputs / 根据输入:
-1. **Action**: Generate `docker-compose.yml`. / 生成 `docker-compose.yml`。
-2. **Action**: Generate `.env`. **IMPORTANT**: Inject `HTTP_PROXY` if detected. / 生成 `.env`。**重要**：如果检测到代理，自动注入 `HTTP_PROXY`。
-3. **Action**: Start service (`docker-compose up -d`). / 启动服务。
+1. **Action**: Generate `.env` configuration. **IMPORTANT**: Inject `HTTP_PROXY` if detected. / 生成 `.env` 配置。**重要**：如果检测到代理，自动注入 `HTTP_PROXY`。
+2. **Action**: Start service. / 启动服务。
+   - Execute: `openclaw start` (or ensure service is running). / 执行启动命令（或确保服务已运行）。
 
 **Transition**: Proceed to Phase 3.5. / **下一步**：进入第 3.5 阶段（性能优化）。
 
@@ -62,27 +62,27 @@ Based on inputs / 根据输入:
      - **Ask User**: "Please provide the Provider/Model name for the backup (e.g., `openai/gpt-3.5-turbo` or `anthropic/claude-3-haiku`)." / **询问用户**：提供备用模型的名称。
      - **Action**: Execute:
        ```bash
-       docker-compose exec openclaw openclaw models fallbacks add <backup_model_name>
+       openclaw models fallbacks add <backup_model_name>
        ```
-     - **Verify**: `docker-compose exec openclaw openclaw models fallbacks list`.
+     - **Verify**: `openclaw models fallbacks list`.
 
 2. **Strategy 2: Load Balancing (Multiple Keys) / 策略二：多 Key 负载均衡**:
    - **Explain**: "You can add multiple API keys for the SAME provider to distribute load." / **解释**：“你可以为同一个提供商添加多个 API Key 来分担流量。”
-   - **Action**: Tell user command: "Run `docker-compose exec openclaw openclaw models auth setup-token` manually to add more keys." / **告知用户**：手动运行添加 Key 的命令。
+   - **Action**: Tell user command: "Run `openclaw models auth setup-token` manually to add more keys." / **告知用户**：手动运行添加 Key 的命令。
 
 3. **Strategy 3: Local Memory & Cache (Save Tokens) / 策略三：本地记忆与缓存（省钱省 Token）**:
    - **Explain**: "By using local embedding models and caching, we avoid calling paid APIs for memory retrieval." / **解释**：“使用本地嵌入模型和缓存，避免每次检索记忆都消耗 Token。”
    - **Action**: Configure `memorySearch` to local provider. / **Action**: 配置 `memorySearch` 为本地模式。
      ```bash
-     docker-compose exec openclaw openclaw config set memorySearch.provider local
-     docker-compose exec openclaw openclaw config set memorySearch.cache.enabled true
+     openclaw config set memorySearch.provider local
+     openclaw config set memorySearch.cache.enabled true
      ```
 
 4. **Strategy 4: Reduce Polling Frequency (Quiet Mode) / 策略四：降低查询频次（静默模式）**:
    - **Explain**: "Reduce background heartbeat checks to 1 hour to prevent constant status queries." / **解释**：“将后台心跳检测频率降低为 1 小时，防止飞书端频繁查询状态。”
    - **Action**: Set heartbeat interval. / **Action**: 设置心跳间隔。
      ```bash
-     docker-compose exec openclaw openclaw config set agents.defaults.heartbeat.every "1h"
+     openclaw config set agents.defaults.heartbeat.every "1h"
      ```
 
 **Transition**: Proceed to Phase 4. / **下一步**：进入第四阶段。
@@ -106,7 +106,7 @@ Based on inputs / 根据输入:
    - **Action (Upon receiving code)**:
      Execute command / 执行命令:
      ```bash
-     docker-compose exec openclaw openclaw paring approve feishu <auth_code>
+     openclaw paring approve feishu <auth_code>
      ```
    - **Verify**: Confirm binding. / 确认绑定成功。
 
@@ -119,7 +119,7 @@ Based on inputs / 根据输入:
 2. **If YES**:
    - **Action**: Create a startup script (e.g., `start_openclaw.bat` or `.sh`) on the **Desktop**. / **创建启动脚本**：默认放在桌面。
    - **Script Content**: 
-     - `docker-compose -f <abs_path>/docker-compose.yml up -d`
+     - `openclaw start` (or appropriate start command)
      - Wait 5-10 seconds for services to init. / 等待 5-10 秒以完成初始化。
      - Open browser: `start http://<domain_or_ip>:<port>` (Windows) or `xdg-open` (Linux). / 自动打开浏览器访问 Dashboard。
    - **Ask User**: "Do you want me to automatically register this script to system startup?" / **询问用户**：“是否需要我自动将此脚本注册到系统启动项？”
