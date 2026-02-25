@@ -247,20 +247,51 @@ Based on inputs / 根据输入:
 ### Phase 6: Final Handoff / 最终交付
 **Trigger**: All previous phases completed. / 触发条件：所有前序步骤完成。
 
-**Action**: Display a summary table. / **动作**：展示汇总表。
+**Action**: Gather system status and display a detailed summary. / **动作**：收集系统状态并展示详细汇总。
+
+1. **Execute**: `openclaw config list` (to get full config).
+2. **Execute**: `openclaw models list` (to get model details).
+3. **Execute**: `openclaw skills list` (if available, or list from config).
+
+**Action**: Display the following summary table. / **动作**：展示以下汇总表。
+
 Example Output / 输出示例:
 ```markdown
-✅ OpenClaw 安装完成！
-| 项目 | 状态 |
-|------|------|
-| 版本 | 2026.2.24 |
-| Gateway | 运行中 |
-| Dashboard | http://127.0.0.1:18789/ |
+# ✅ OpenClaw Installation Summary / 安装总结
 
-现在你可以：
+## 1. System Status / 系统状态
+| Component | Status | Info |
+|-----------|--------|------|
+| **Version** | `2026.2.24` | Latest |
+| **Gateway** | 🟢 Running | Port: `18789` |
+| **Dashboard**| [Click Here](http://127.0.0.1:18789/) | `http://127.0.0.1:18789/` |
+
+## 2. Model Configuration / 模型配置
+| Provider | Model ID | Usage |
+|----------|----------|-------|
+| **Primary** | `openai/gpt-4o` | Chat, Code |
+| **Fallback** | `minimax/abab6.5s-chat` | Anti-Rate Limit |
+| **Embedding**| `local/text-embedding-3-small` | Memory Search |
+
+> *Full Model Config (JSON snapshot):*
+> ```json
+> { "openai": { "model": "gpt-4o", "apiKey": "sk-..." } }
+> ```
+
+## 3. Active Channels / 活跃渠道
+- **Feishu (飞书)**:
+  - App ID: `cli_...`
+  - Mode: `WebSocket (Long Connection)`
+  - Status: 🟢 Connected
+
+## 4. Installed Skills / 已安装技能
+- `figo-openclaw-installer` (This skill)
+- `browser-use` (Web Automation)
+- `python-interpreter` (Code Execution)
+
+---
+**Next Steps / 下一步**:
 - 访问 Dashboard: http://127.0.0.1:18789/
-- 使用 openclaw tui 打开终端界面
-- 配置模型: openclaw models
 - **查看桌面上的《OpenClaw使用手册》和《OpenClaw 常见场景》**
 ```
 
