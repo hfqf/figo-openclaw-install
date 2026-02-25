@@ -306,10 +306,18 @@ Based on inputs / 根据输入:
      -d '{ "contents": [{ "parts":[{"text": "Hello"}] }] }'
    ```
 
-   **For MiniMax:**
+   **For MiniMax (International / 海外版):**
    ```bash
-   # Use the Base URL from config (e.g., https://api.minimax.io/anthropic)
-   curl <BASE_URL>/messages \
+   curl https://api.minimax.io/anthropic/messages \
+     -H "x-api-key: <USER_KEY>" \
+     -H "anthropic-version: 2023-06-01" \
+     -H "content-type: application/json" \
+     -d '{ "model": "abab6.5s-chat", "max_tokens": 10, "messages": [{"role": "user", "content": "Hello"}] }'
+   ```
+
+   **For MiniMax (Domestic / 国内版):**
+   ```bash
+   curl https://api.minimaxi.com/anthropic/messages \
      -H "x-api-key: <USER_KEY>" \
      -H "anthropic-version: 2023-06-01" \
      -H "content-type: application/json" \
