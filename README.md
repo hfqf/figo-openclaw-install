@@ -25,8 +25,8 @@ An automated, bilingual (Chinese/English) expert skill for installing and config
 You can install this skill directly using `npx skills`:
 
 ```bash
-# Install via Gitee (Recommended for China)
-npx skills add https://gitee.com/hfqf1234/openclaw-install-faq
+# Install via GitHub
+npx skills add https://github.com/hfqf/figo-openclaw-install
 ```
 
 ## Usage
@@ -67,8 +67,8 @@ Or ask naturally:
 使用 `npx skills` 命令直接安装：
 
 ```bash
-# 通过 Gitee 安装（国内推荐）
-npx skills add https://gitee.com/hfqf1234/openclaw-install-faq
+# 通过 GitHub 安装
+npx skills add https://github.com/hfqf/figo-openclaw-install
 ```
 
 ## 使用方法
