@@ -48,7 +48,6 @@
 | :--- | :--- | :--- |
 | `Connection refused` | 连不上网 | 检查代理软件，或者检查 OpenClaw 是否启动。 |
 | `502 Bad Gateway` | 服务正在启动中 | 别急，让它再跑一会儿（通常需要 1-2 分钟）。 |
-| `Docker not running` | 引擎没开 | 你的 Docker 软件没开。请先运行 Docker Desktop，等它变绿后再启动 OpenClaw。 |
 | `EADDRINUSE` | 端口被占用 | 你的电脑上有其他软件占用了 OpenClaw 需要的端口。请尝试重启电脑，或关闭其他开发工具。 |
 | `spawn EINVAL` | Windows 抽风了 | 这是一个 Windows 特有的命令执行错误。通常重启服务（关闭黑框框再打开）就能解决。如果一直报错，请联系技术人员重新安装插件。 |
 | `model not allowed` | 模型没权限 | 你想用的 AI 模型没在白名单里。请联系管理员在后台添加该模型。 |
