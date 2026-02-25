@@ -41,6 +41,7 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
     "baseUrl": "http://localhost:11434/v1",
     "apiKey": "ollama",
     "models": [
+      { "id": "ollama/llama4", "usage": "chat" },
       { "id": "ollama/llama3", "usage": "chat" },
       { "id": "ollama/qwen2.5", "usage": "chat" }
     ]
@@ -51,10 +52,12 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
 ```json
 "anthropic": {
   "api": "anthropic-messages",
+  "baseUrl": "https://api.anthropic.com/v1",
   "apiKey": "${ANTHROPIC_API_KEY}",
   "models": [
-    { "id": "claude-3-5-sonnet-20240620", "usage": "chat" },
-    { "id": "claude-3-opus-20240229", "usage": "chat" }
+    { "id": "claude-4.5-sonnet", "usage": "chat" },
+    { "id": "claude-4.5-opus", "usage": "chat" },
+    { "id": "claude-3-5-sonnet-20240620", "usage": "chat" }
   ]
 }
 ```
@@ -63,11 +66,12 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
   ```json
   "deepseek": {
     "api": "openai-completions",
-    "baseUrl": "https://api.deepseek.com",
+    "baseUrl": "https://api.deepseek.com/v1",
     "apiKey": "${DEEPSEEK_API_KEY}",
     "models": [
-      { "id": "deepseek-chat", "usage": "chat" },
-      { "id": "deepseek-coder", "usage": "code" }
+      { "id": "deepseek-v4", "usage": "chat" },
+      { "id": "deepseek-r1", "usage": "chat" },
+      { "id": "deepseek-chat", "usage": "chat" }
     ]
   }
   ```
@@ -79,8 +83,10 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
     "baseUrl": "https://your-oneapi-domain.com/v1",
     "apiKey": "${ONEAPI_KEY}",
     "models": [
-      { "id": "gpt-4o", "usage": "chat" },
-      { "id": "claude-3-5-sonnet", "usage": "chat" }
+      { "id": "gpt-5.2", "usage": "chat" },
+      { "id": "gpt-5.2-instant", "usage": "chat" },
+      { "id": "gpt-5.2-thinking", "usage": "chat" },
+      { "id": "claude-4.5-sonnet", "usage": "chat" }
     ]
   }
   ```
@@ -96,7 +102,8 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
     "baseUrl": "https://api.minimax.io/anthropic",
     "apiKey": "${MINIMAX_API_KEY}",
     "models": [
-      { "id": "minimax/abab6.5s-chat", "usage": "chat" }
+      { "id": "minimax-m2.5", "usage": "chat" },
+      { "id": "abab6.5s-chat", "usage": "chat" }
     ]
   }
   ```
@@ -108,7 +115,8 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
     "baseUrl": "https://api.minimaxi.com/anthropic",
     "apiKey": "${MINIMAX_API_KEY}",
     "models": [
-      { "id": "minimax/abab6.5s-chat", "usage": "chat" }
+      { "id": "minimax-m2.5", "usage": "chat" },
+      { "id": "abab6.5s-chat", "usage": "chat" }
     ]
   }
   ```
@@ -120,11 +128,12 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
     "baseUrl": "https://api.openai.com/v1",
     "apiKey": "${OPENAI_API_KEY}",
     "models": [
+      { "id": "gpt-5.2", "usage": "chat" },
+      { "id": "gpt-5.2-instant", "usage": "chat" },
+      { "id": "gpt-5.2-thinking", "usage": "chat" },
       { "id": "gpt-4o", "usage": "chat" },
-      { "id": "o1-preview", "usage": "chat" },
-      { "id": "o1-mini", "usage": "chat" },
-      { "id": "gpt-4-turbo", "usage": "chat" },
-      { "id": "gpt-3.5-turbo", "usage": "chat" }
+      { "id": "o4-mini", "usage": "chat" },
+      { "id": "o3-mini", "usage": "chat" }
     ]
   }
   ```
@@ -132,11 +141,12 @@ You are an expert in installing and configuring OpenClaw. Your goal is to **AUTO
   **6. Google Gemini (OpenAI Compatible / 兼容模式)**
   ```json
   "google": {
-    "api": "openai-completions",
-    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai/",
-    "apiKey": "${GEMINI_API_KEY}",
+    "api": "google-gemini",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+    "apiKey": "${GOOGLE_API_KEY}",
     "models": [
-      { "id": "gemini-1.5-flash", "usage": "chat" },
+      { "id": "gemini-3-pro", "usage": "chat" },
+      { "id": "gemini-3-flash", "usage": "chat" },
       { "id": "gemini-1.5-pro", "usage": "chat" }
     ]
   }
@@ -177,7 +187,7 @@ Ask user to choose **ONE** primary provider and provide details. / 让用户选�
 **Options / 选项**:
 1. **OpenAI** (Official)
    - Ask: API Key?
-   - Ask: Model Name (default: `gpt-4o`)?
+   - Ask: Model Name (default: `gpt-5.2`)?
    - Default Model: `openai/<model_name>`
 2. **Anthropic** (Claude)
    - Ask: API Key?
@@ -445,13 +455,13 @@ Example Output / 输出示例:
 ## 2. Model Configuration / 模型配置
 | Provider | Model ID | Usage |
 |----------|----------|-------|
-| **Primary** | `openai/gpt-4o` | Chat, Code |
+| **Primary** | `openai/gpt-5.2` | Chat, Code |
 | **Fallback** | `minimax/abab6.5s-chat` | Anti-Rate Limit |
 | **Embedding**| `local/text-embedding-3-small` | Memory Search |
 
 > *Full Model Config (JSON snapshot):*
 > ```json
-> { "openai": { "model": "gpt-4o", "apiKey": "sk-..." } }
+> { "openai": { "model": "gpt-5.2", "apiKey": "sk-..." } }
 > ```
 
 ## 3. Active Channels / 活跃渠道
